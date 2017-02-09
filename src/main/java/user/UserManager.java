@@ -11,6 +11,9 @@ import java.util.ArrayList;
  */
 public class UserManager extends UserConnection implements UserInterface{
 
+    /*
+    *create User
+     */
     public void createUser(String name, String age, String employment, String hoby)  {
         connect();
         prepareToCreate();
@@ -29,6 +32,9 @@ public class UserManager extends UserConnection implements UserInterface{
         closeConnect();
     }
 
+    /*
+    *Delete User by ID
+     */
     public void deleteUser(int id) {
         connect();
         prepareToDelete();
@@ -44,6 +50,9 @@ public class UserManager extends UserConnection implements UserInterface{
         closeConnect();
     }
 
+    /*
+    *Update user
+     */
     public void updateUser(String name, String age, String employment, String hoby, int id) {
         connect();
         prepareToUpdate();
@@ -64,6 +73,10 @@ public class UserManager extends UserConnection implements UserInterface{
 
     }
 
+    /*
+    * make double Object Array for all user from the DB
+    *from each elements is one Row
+     */
     public ArrayList<ArrayList<String>> getAllUsers() {
         connect();
         prepareToGet();
@@ -72,18 +85,21 @@ public class UserManager extends UserConnection implements UserInterface{
         int id = 1;
         while (true)
         {
-            userData = getUser(id);
-            if(userData.get(1) == null)
-                break;
-            else
-                ++id;
+            userData = getUser(id);             /*get one row*/
+            if(userData.get(1) == null)         /*if it`s a null row*/
+                break;                          /*we break out*/
+            else                                /*else*/
+                ++id;                           /*we get next ID*/
+            massUserData.add(userData);         /*and add this row to the object array*/
         }
-
         closePrepare();
         closeConnect();
         return massUserData;
     }
 
+    /*
+    *Object Array describe one row from DB
+     */
     public ArrayList<String> getUser(int id) {
         connect();
         prepareToGet();

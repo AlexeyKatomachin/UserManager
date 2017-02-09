@@ -8,12 +8,23 @@ import java.sql.SQLException;
  * Created by ${Alexey} on ${09.08.2016}.
  */
 public class UserConnection implements UserConnectionInterface {
+
+    /*
+    * It`s a connection variables
+     */
     public java.sql.Connection connection = null;
     public PreparedStatement preparedStatement = null;
+
+    /*
+    * It`s variables for log to the DB server
+     */
     private String url  = "jdbc:mysql://localhost:3366/userdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
     private String login = "root";
     private String pass = "alex1996";
 
+    /*
+    * Here we make connection to the server
+     */
     public void connect()
     {
         try
@@ -37,7 +48,9 @@ public class UserConnection implements UserConnectionInterface {
         }
     }
 
-
+    /*
+    * Here we close connection to the server
+     */
     public void closeConnect()
     {
         try {
@@ -48,6 +61,10 @@ public class UserConnection implements UserConnectionInterface {
         }
     }
 
+    /*
+    * Here we create response to create some user
+     * and prepare data to send to the server
+     */
     public void prepareToCreate()
     {
         String insertQueryStatement = "insert into users(user_name,user_age,user_employment,user_hoby) value (?,?,?,?)";
@@ -61,6 +78,10 @@ public class UserConnection implements UserConnectionInterface {
 
     }
 
+    /*
+    * Here we create response to delete some user
+     * and prepare data to send to the server
+     */
     public void prepareToDelete() {
         String inserQueryStatement = "update users" +
                 " set user_name = NULL , user_age = NULL , user_employment = NULL , user_hoby = NULL " +
@@ -74,6 +95,10 @@ public class UserConnection implements UserConnectionInterface {
         }
     }
 
+    /*
+    * Here we create response to update some user
+     * and prepare data to send to the server
+     */
     public void prepareToUpdate() {
         String insertQueryStatement = "update users" +
                 " set user_name = ?, user_age = ?, user_employment = ?, user_hoby = ?" +
@@ -87,6 +112,10 @@ public class UserConnection implements UserConnectionInterface {
         }
     }
 
+    /*
+    * Here we create request to get user data
+     * and prepare data to send to the server
+     */
     public void prepareToGet()
     {
         String insertQueryStatement = "SELECT user_name, user_age, user_employment, user_hoby" +
@@ -102,6 +131,9 @@ public class UserConnection implements UserConnectionInterface {
 
     }
 
+    /*
+    * Close prepare statement
+     */
     public void closePrepare()
     {
         try {
