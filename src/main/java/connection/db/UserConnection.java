@@ -73,11 +73,10 @@ public class UserConnection implements UserConnectionInterface {
      * and prepare data to send to the server
      */
     public void prepareToDelete() {
-        String inserQueryStatement = "update users" +
-                " set user_name = NULL , user_age = NULL , user_employment = NULL , user_hoby = NULL " +
+        String insertQueryStatement = "delete from users " +
                 "where user_id = ?";
         try {
-            preparedStatement = connection.prepareStatement(inserQueryStatement);
+            preparedStatement = connection.prepareStatement(insertQueryStatement);
         } catch (SQLException e) {
             System.out.println("Prepare Statement Failed");
             e.printStackTrace();
@@ -105,7 +104,7 @@ public class UserConnection implements UserConnectionInterface {
      * and prepare data to send to the server
      */
     public void prepareToGet() {
-        String insertQueryStatement = "SELECT user_name, user_age, user_employment, user_hoby" +
+        String insertQueryStatement = "SELECT user_id, user_name, user_age, user_employment, user_hoby" +
                 " FROM users" +
                 " where user_id = ?";
         try {

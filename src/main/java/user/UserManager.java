@@ -82,7 +82,7 @@ public class UserManager extends UserConnection implements UserInterface {
         int id = 1;
         while (true) {
             userData = getUser(id);             /*get one row*/
-            if (userData.get(1) == null)         /*if it`s a null row*/
+            if (userData.get(1) == null)         /*if it`s a null id of row*/
                 break;                          /*we break out*/
             else                                /*else*/
                 ++id;                           /*we get next ID*/
@@ -104,6 +104,7 @@ public class UserManager extends UserConnection implements UserInterface {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
+                userData.add(resultSet.getString("user_id"));
                 userData.add(resultSet.getString("user_name"));
                 userData.add(resultSet.getString("user_age"));
                 userData.add(resultSet.getString("user_employment"));
