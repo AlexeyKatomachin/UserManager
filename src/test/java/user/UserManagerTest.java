@@ -24,21 +24,23 @@ public class UserManagerTest {
     @Test
     public void deleteUserTest(){
         UserManager userManager = new UserManager();
-        userManager.deleteUser(1);
-        for (String userData: userManager.getUser(1)) {
+        userManager.deleteUser(3);
+        for (String userData:userManager.getUser(3)) {
             assertNull(userData);
         }
     }
+
 
     @Test
     public void getAllUsersTest() {
         UserManager userManager =  new UserManager();
         for (ArrayList<String> userArray: userManager.getAllUsers()) {
-            assertNotNull(userArray.get(1));
+            assertNotNull(userArray.get(5));
             assertNotNull(userArray);
         }
     }
 
+    
     @Test
     public void getUserTest() {
         UserManager userManager = new UserManager();
