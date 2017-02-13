@@ -62,7 +62,7 @@ public class UserConnection implements UserConnectionInterface {
         try {
             preparedStatement = connection.prepareStatement(insertQueryStatement);
         } catch (SQLException e) {
-            System.out.println("Prepare Statement Failed");
+            System.out.println("Prepare Statement to create Failed");
             e.printStackTrace();
         }
 
@@ -78,7 +78,7 @@ public class UserConnection implements UserConnectionInterface {
         try {
             preparedStatement = connection.prepareStatement(insertQueryStatement);
         } catch (SQLException e) {
-            System.out.println("Prepare Statement Failed");
+            System.out.println("Prepare Statement to delete Failed");
             e.printStackTrace();
         }
     }
@@ -94,7 +94,7 @@ public class UserConnection implements UserConnectionInterface {
         try {
             preparedStatement = connection.prepareStatement(insertQueryStatement);
         } catch (SQLException e) {
-            System.out.println("Prepare Statement Failed");
+            System.out.println("Prepare Statement to update Failed");
             e.printStackTrace();
         }
     }
@@ -110,10 +110,30 @@ public class UserConnection implements UserConnectionInterface {
         try {
             preparedStatement = connection.prepareStatement(insertQueryStatement);
         } catch (SQLException e) {
-            System.out.println("Prepare Statement Failed");
+            System.out.println("Prepare Statement to get Failed");
             e.printStackTrace();
         }
 
+    }
+
+    public void prepareToGetAllID() {
+        String insertQueryStatement = "SELECT user_id FROM users WHERE user_id IS NOT NULL";
+        try {
+            preparedStatement = connection.prepareStatement(insertQueryStatement);
+        }catch (SQLException e){
+            System.out.println("Prepare Statement to get all Failed");
+            e.printStackTrace();
+        }
+    }
+
+    public void prepareToGetQuantityID() {
+        String insertQueryStatement = "SELECT count(*) AS quantityId FROM users WHERE user_id IS NOT NULL";
+        try {
+            preparedStatement = connection.prepareStatement(insertQueryStatement);
+        }catch (SQLException e){
+            System.out.println("Prepare Statement to get all Failed");
+            e.printStackTrace();
+        }
     }
 
     /*

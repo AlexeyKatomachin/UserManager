@@ -1,6 +1,7 @@
 package user;
 
 import connection.db.UserConnection;
+import user.specialFunctions.Functions;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -77,16 +78,10 @@ public class UserManager extends UserConnection implements UserInterface {
     public ArrayList<ArrayList<String>> getAllUsers() {
         connect();
         prepareToGet();
-        ArrayList<String> userData;
+        Functions functions = new Functions();
         ArrayList<ArrayList<String>> massUserData = new ArrayList<ArrayList<String>>();
-        int id = 1;
-        while (true) {
-            userData = getUser(id);             /*get one row*/
-            if (userData.get(1) == null)         /*if it`s a null id of row*/
-                break;                          /*we break out*/
-            else                                /*else*/
-                ++id;                           /*we get next ID*/
-            massUserData.add(userData);         /*and add this row to the object array*/
+        for (int i = 0; i < functions.getQuantityID(); ++i){
+            massUserData.add(getUser(functions.getAllUsersId()[i]));
         }
         closePrepare();
         closeConnect();
@@ -109,8 +104,8 @@ public class UserManager extends UserConnection implements UserInterface {
                 userData.add(resultSet.getString("user_age"));
                 userData.add(resultSet.getString("user_employment"));
                 userData.add(resultSet.getString("user_hoby"));
+
             }
-            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Send Failed");
             e.printStackTrace();

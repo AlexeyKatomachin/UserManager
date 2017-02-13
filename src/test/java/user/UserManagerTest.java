@@ -4,9 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 /**
  * Created by ${Alexey} on ${09.08.2016}.
@@ -34,17 +32,22 @@ public class UserManagerTest {
     @Test
     public void getAllUsersTest() {
         UserManager userManager =  new UserManager();
-        for (ArrayList<String> userArray: userManager.getAllUsers()) {
-            assertNotNull(userArray.get(5));
+        for (ArrayList<String> userArray : userManager.getAllUsers()) {
+            for (String userData: userArray) {
+                System.out.print(userData + " ");
+            }
+            System.out.println();
+            assertNotNull(userArray.get(0));
             assertNotNull(userArray);
         }
     }
 
-    
+
+
     @Test
     public void getUserTest() {
         UserManager userManager = new UserManager();
-        assertNotNull(userManager.getUser(0));
+        assertNotNull(userManager.getUser(6));
         assertNotEquals(new UserManager(),userManager.getUser(0));
     }
 
