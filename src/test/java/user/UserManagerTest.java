@@ -33,10 +33,6 @@ public class UserManagerTest {
     public void getAllUsersTest() {
         UserManager userManager =  new UserManager();
         for (ArrayList<String> userArray : userManager.getAllUsers()) {
-            for (String userData: userArray) {
-                System.out.print(userData + " ");
-            }
-            System.out.println();
             assertNotNull(userArray.get(0));
             assertNotNull(userArray);
         }

@@ -116,6 +116,9 @@ public class UserConnection implements UserConnectionInterface {
 
     }
 
+    /*
+    * Prepare statement for DB to get all users
+    */
     public void prepareToGetAllID() {
         String insertQueryStatement = "SELECT user_id FROM users WHERE user_id IS NOT NULL";
         try {
@@ -126,6 +129,9 @@ public class UserConnection implements UserConnectionInterface {
         }
     }
 
+    /*
+    * Prepare statement for DB to get quantity of ID
+    */
     public void prepareToGetQuantityID() {
         String insertQueryStatement = "SELECT count(*) AS quantityId FROM users WHERE user_id IS NOT NULL";
         try {
