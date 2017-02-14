@@ -1,8 +1,7 @@
 package user;
 
 import org.junit.Test;
-
-import java.util.ArrayList;
+import user.userToJSON.User;
 
 import static org.junit.Assert.*;
 
@@ -14,7 +13,12 @@ public class UserManagerTest {
     @Test
     public void createUserTest() {
         UserManager userManager = new UserManager();
-        userManager.createUser("Billy",25,"dancer","make music");
+        User user = new User();
+        user.setName("Billy");
+        user.setAge(25);
+        user.setEmployment("dancer");
+        user.setHoby("make music");
+        userManager.createUser(user);
         assertNotNull(userManager.getUser(1));
         assertNotEquals(new UserManager(),userManager.getUser(1));
     }
@@ -23,18 +27,21 @@ public class UserManagerTest {
     public void deleteUserTest(){
         UserManager userManager = new UserManager();
         userManager.deleteUser(3);
-        for (String userData:userManager.getUser(3)) {
-            assertNull(userData);
-        }
+        User user = userManager.getUser(3);
+        assertEquals(0,user.getAge());
+        assertNull(user.getEmployment());
+        assertNull(user.getHoby());
+        assertNull(user.getName());
+        assertEquals(0,user.getId());
     }
 
 
     @Test
     public void getAllUsersTest() {
         UserManager userManager =  new UserManager();
-        for (ArrayList<String> userArray : userManager.getAllUsers()) {
-            assertNotNull(userArray.get(0));
-            assertNotNull(userArray);
+        for (User user : userManager.getAllUsers()) {
+            assertNotNull(user.getId());
+            assertNotNull(user);
         }
     }
 
@@ -52,7 +59,13 @@ public class UserManagerTest {
     public void updateUserTest()
     {
         UserManager userManager = new UserManager();
-        userManager.updateUser("Alex",15,"student","play basketball", 1);
+        User user = new User();
+        user.setId(1);
+        user.setName("Alex");
+        user.setAge(15);
+        user.setEmployment("student");
+        user.setHoby("play basketball");
+        userManager.updateUser(user);
         assertNotEquals(new UserManager(),userManager);
     }
 }

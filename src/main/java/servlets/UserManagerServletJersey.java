@@ -2,7 +2,6 @@ package servlets;
 
 import user.UserManager;
 import user.userToJSON.User;
-import user.userToJSON.UsersArray;
 
 import javax.servlet.http.HttpServlet;
 import javax.ws.rs.*;
@@ -15,14 +14,12 @@ import java.util.ArrayList;
  */
 @Path("/user")
 
-public class UserManagerService extends HttpServlet {
+public class UserManagerServletJersey extends HttpServlet {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public UsersArray getAllUsers() {
-        UsersArray usersArray = new UsersArray();
-        usersArray.setUserArray(new UserManager().getAllUsers());
-        return usersArray;
+    public ArrayList<User> getAllUsers() {
+        return new UserManager().getAllUsers();
     }
 
     @GET
@@ -30,12 +27,12 @@ public class UserManagerService extends HttpServlet {
     @Produces(MediaType.APPLICATION_JSON)
     public User getUser (@PathParam("id") int id){
         User user = new User();
-        ArrayList<String> userData = new UserManager().getUser(id);
+        User userData = new UserManager().getUser(id);
         user.setId(id);
-        user.setName(userData.get(1));
-        user.setAge(Integer.getInteger(userData.get(2)));
-        user.setEmployment(userData.get(3));
-        user.setHoby(userData.get(4));
+        user.setName(userData.getName());
+        user.setAge(userData.getAge());
+        user.setEmployment(userData.getEmployment());
+        user.setHoby(userData.getHoby());
         return user;
     }
 
@@ -44,8 +41,7 @@ public class UserManagerService extends HttpServlet {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateUser (@PathParam("id") int id, User user)
     {
-        UserManager userManager = new UserManager();
-        userManager.updateUser(user.getName(),user.getAge(),user.getEmployment(),user.getHoby(),id);
+        new UserManager().updateUser(user);
         return Response.status(201).entity(user).build(); // I`m not sure about this
     }
 
@@ -60,7 +56,7 @@ public class UserManagerService extends HttpServlet {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response createUser(User user){
-        new UserManager().createUser(user.getName(),user.getAge(),user.getEmployment(),user.getHoby());
+        new UserManager().createUser(user);
         return Response.status(201).build();// I`m not sure about this
     }
 }

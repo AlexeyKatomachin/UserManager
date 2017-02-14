@@ -14,17 +14,18 @@ import java.sql.SQLException;
 * and get array of real users ID
 */
 
-public class Functions extends UserConnection {
+public class Functions {
+    private UserConnection userConnection = new UserConnection();
 
     /*
     * get Id of all users
     */
     public int[] getAllUsersId() {
-        connect();
-        prepareToGetAllID();
+        userConnection.connect();
+        userConnection.prepareToGetAllID();
         int[] usersID = null;
         try {
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = userConnection.preparedStatement.executeQuery();
             if (getQuantityID() != 0) {
                 usersID = new int[getQuantityID()];
                 for (int i = 0; i < getQuantityID(); ++i) {
@@ -36,6 +37,8 @@ public class Functions extends UserConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        userConnection.closeConnect();
+        userConnection.closePrepare();
         return usersID;
     }
 
@@ -43,17 +46,19 @@ public class Functions extends UserConnection {
     * get quantity of ID
     */
     public int getQuantityID() {
-        connect();
-        prepareToGetQuantityID();
+        userConnection.connect();
+        userConnection.prepareToGetQuantityID();
         int quantityID = 0;
         try {
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = userConnection.preparedStatement.executeQuery();
             if (resultSet.next()) {
                 quantityID = resultSet.getInt("quantityId");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        userConnection.closeConnect();
+        userConnection.closePrepare();
         return quantityID;
     }
 }

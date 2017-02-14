@@ -2,6 +2,7 @@ package user;
 
 import connection.db.UserConnection;
 import user.specialFunctions.Functions;
+import user.userToJSON.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,64 +11,66 @@ import java.util.ArrayList;
 /**
  * Created by ${Alexey} on ${09.08.2016}.
  */
-public class UserManager extends UserConnection implements UserInterface {
+public class UserManager implements UserInterface {
+    private UserConnection userConnection = new UserConnection();
 
     /*
     *create User
      */
-    public void createUser(String name, int age, String employment, String hoby) {
-        connect();
-        prepareToCreate();
+    public void createUser(User user) {
+        userConnection.connect();
+        userConnection.prepareToCreate();
         try {
-            preparedStatement.setString(1, name);
-            preparedStatement.setInt(2, age);
-            preparedStatement.setString(3, employment);
-            preparedStatement.setString(4, hoby);
-            preparedStatement.executeUpdate();
+            userConnection.preparedStatement.setString(1, user.getName());
+            userConnection.preparedStatement.setInt(2, user.getAge());
+            userConnection.preparedStatement.setString(3, user.getEmployment());
+            userConnection.preparedStatement.setString(4, user.getHoby());
+            userConnection.preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Send Failed");
             e.printStackTrace();
         }
-        closePrepare();
-        closeConnect();
+        userConnection.closePrepare();
+        userConnection.closeConnect();
+
     }
 
     /*
     *Delete User by ID
      */
     public void deleteUser(int id) {
-        connect();
-        prepareToDelete();
+        userConnection.connect();
+        userConnection.prepareToDelete();
         try {
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
+            userConnection.preparedStatement.setInt(1, id);
+            userConnection.preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Send Failed");
             e.printStackTrace();
         }
-        closePrepare();
-        closeConnect();
+        userConnection.closePrepare();
+        userConnection.closeConnect();
     }
 
     /*
     *Update user
      */
-    public void updateUser(String name, int age, String employment, String hoby, int id) {
-        connect();
-        prepareToUpdate();
+    public void updateUser(User user) {
+        userConnection.connect();
+        userConnection.prepareToUpdate();
         try {
-            preparedStatement.setString(1, name);
-            preparedStatement.setInt(2, age);
-            preparedStatement.setString(3, employment);
-            preparedStatement.setString(4, hoby);
-            preparedStatement.setInt(5, id);
-            preparedStatement.executeUpdate();
+            userConnection.preparedStatement.setString(1, user.getName());
+            userConnection.preparedStatement.setInt(2, user.getAge());
+            userConnection.preparedStatement.setString(3, user.getEmployment());
+            userConnection.preparedStatement.setString(4, user.getHoby());
+            userConnection.preparedStatement.setInt(5, user.getId());
+            userConnection.preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Send Failed");
             e.printStackTrace();
         }
-        closePrepare();
-        closeConnect();
+        userConnection.closePrepare();
+        userConnection.closeConnect();
 
     }
 
@@ -75,43 +78,43 @@ public class UserManager extends UserConnection implements UserInterface {
     * make double Object Array for all user from the DB
     *from each elements is one Row
      */
-    public ArrayList<ArrayList<String>> getAllUsers() {
-        connect();
-        prepareToGet();
+    public ArrayList<User> getAllUsers() {
+        userConnection.connect();
+        userConnection.prepareToGet();
         Functions functions = new Functions();
-        ArrayList<ArrayList<String>> massUserData = new ArrayList<ArrayList<String>>();
+        ArrayList<User> massUserData = new ArrayList<User>();
         for (int i = 0; i < functions.getQuantityID(); ++i){
             massUserData.add(getUser(functions.getAllUsersId()[i]));
         }
-        closePrepare();
-        closeConnect();
+        userConnection.closePrepare();
+        userConnection.closeConnect();
         return massUserData;
     }
 
     /*
     *Object Array describe one row from DB
      */
-    public ArrayList<String> getUser(int id) {
-        connect();
-        prepareToGet();
-        ArrayList<String> userData = new ArrayList<String>();
+    public User getUser(int id) {
+        userConnection.connect();
+        userConnection.prepareToGet();
+        User user = new User();
         try {
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            userConnection.preparedStatement.setInt(1, id);
+            ResultSet resultSet = userConnection.preparedStatement.executeQuery();
             if (resultSet.next()) {
-                userData.add(resultSet.getString("user_id"));
-                userData.add(resultSet.getString("user_name"));
-                userData.add(resultSet.getString("user_age"));
-                userData.add(resultSet.getString("user_employment"));
-                userData.add(resultSet.getString("user_hoby"));
+                user.setId(resultSet.getInt("user_id"));
+                user.setName(resultSet.getString("user_name"));
+                user.setAge(resultSet.getInt("user_age"));
+                user.setEmployment(resultSet.getString("user_employment"));
+                user.setHoby(resultSet.getString("user_hoby"));
 
             }
         } catch (SQLException e) {
             System.out.println("Send Failed");
             e.printStackTrace();
         }
-        closePrepare();
-        closeConnect();
-        return userData;
+        userConnection.closePrepare();
+        userConnection.closeConnect();
+        return user;
     }
 }
