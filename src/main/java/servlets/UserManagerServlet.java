@@ -38,7 +38,7 @@ public class UserManagerServlet extends HttpServlet {
             String userIdStr = req.getRequestURL().substring(lastSymbol);
             int userId = Integer.valueOf(userIdStr);
 
-        /* make JSON String*/
+        /* make JSON Stream*/
             mapper.writeValue(res.getOutputStream(), new UserManager().getUser(userId));
 
         }else if ((lastSymbol == req.getRequestURL().length() || (lastSymbol <= req.getRequestURL().indexOf("user")))){

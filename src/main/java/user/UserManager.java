@@ -75,8 +75,7 @@ public class UserManager implements UserInterface {
     }
 
     /*
-    * make double Object Array for all user from the DB
-    *from each elements is one Row
+    * make users Array
      */
     public ArrayList<User> getAllUsers() {
         userConnection.connect();
@@ -92,7 +91,7 @@ public class UserManager implements UserInterface {
     }
 
     /*
-    *Object Array describe one row from DB
+    * make Object user
      */
     public User getUser(int id) {
         userConnection.connect();

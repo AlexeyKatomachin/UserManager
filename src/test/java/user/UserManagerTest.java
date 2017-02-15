@@ -55,7 +55,6 @@ public class UserManagerTest {
     }
 
     @Test
-
     public void updateUserTest()
     {
         UserManager userManager = new UserManager();
