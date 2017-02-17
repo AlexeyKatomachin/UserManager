@@ -1,4 +1,4 @@
-package akatomakhin.apps.usermanager.usermanager;
+package akatomakhin.apps.usermanager.facade;
 
 import org.junit.Test;
 import akatomakhin.apps.usermanager.user.object.User;

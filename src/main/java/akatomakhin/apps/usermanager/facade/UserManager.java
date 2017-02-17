@@ -1,4 +1,4 @@
-package akatomakhin.apps.usermanager.usermanager;
+package akatomakhin.apps.usermanager.facade;
 
 import akatomakhin.apps.usermanager.connection.db.mysql.MySQLUserDAO;
 import akatomakhin.apps.usermanager.user.object.User;
