@@ -1,6 +1,7 @@
 package akatomakhin.apps.usermanager.facade;
 
 import akatomakhin.apps.usermanager.connection.db.mysql.MySQLUserDAO;
+import akatomakhin.apps.usermanager.servlets.object.to.client.massage.UserMassage;
 import akatomakhin.apps.usermanager.user.object.User;
 
 import java.util.ArrayList;
@@ -27,8 +28,24 @@ public class UserManager implements UserManagerInterface {
     /*
     *Update user
      */
-    public void updateUser(User user) {
-        new MySQLUserDAO().updateUser(user);
+    public UserMassage updateUser(User user) {
+        UserMassage userMassage = new UserMassage();
+        if (user.getAge() == 0){
+            userMassage.setMassage("Enter age");
+            return userMassage;
+        } else if((user.getAge()<18)){
+            userMassage.setMassage("Age less then 18");
+            return userMassage;
+        } else if(user.getName() == ""){
+            userMassage.setMassage("Enter name");
+            return userMassage;
+        } else if (user.getName().length() > 20) {
+            userMassage.setMassage("Name is so big. Sorry ):");
+            return userMassage;
+        } else  {
+            new MySQLUserDAO().updateUser(user);
+            return new UserMassage();
+        }
     }
 
     /*

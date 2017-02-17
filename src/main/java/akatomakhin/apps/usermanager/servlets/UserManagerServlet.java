@@ -1,6 +1,7 @@
 package akatomakhin.apps.usermanager.servlets;
 
 import akatomakhin.apps.usermanager.facade.UserManager;
+import akatomakhin.apps.usermanager.servlets.object.to.client.massage.type.ErrorMassage;
 import akatomakhin.apps.usermanager.user.object.User;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -43,7 +44,6 @@ public class UserManagerServlet extends HttpServlet {
         }else if ((lastSymbol == req.getRequestURL().length() || (lastSymbol <= req.getRequestURL().indexOf("akatomakhin/apps/usermanager/user")))){
             mapper.writeValue(res.getOutputStream(), new UserManager().getAllUsers());
         }
-
         res.getOutputStream().flush();
         res.getOutputStream().close();
 
@@ -96,7 +96,16 @@ public class UserManagerServlet extends HttpServlet {
             String userIdStr = req.getRequestURL().substring(lastSymbol);
             int userId = Integer.valueOf(userIdStr);
             user.setId(userId);
-            new UserManager().updateUser(user);
+            if( new UserManager().updateUser(user).getMassage() != null){
+                ErrorMassage errorMassage = new ErrorMassage();
+                errorMassage.setError(new UserManager().updateUser(user));
+                String massageError = mapper.writeValueAsString(errorMassage);
+                res.addHeader("Content-Type","application/json");
+                res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                mapper.writeValue(res.getOutputStream(),errorMassage);
+                res.getOutputStream().flush();
+                res.getOutputStream().close();
+            }
         }
     }
 }
