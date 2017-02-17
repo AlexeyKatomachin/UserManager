@@ -1,6 +1,6 @@
 package akatomakhin.apps.usermanager.servlets;
 
-import akatomakhin.apps.usermanager.facade.UserManager;
+import akatomakhin.apps.usermanager.usermanager.UserManager;
 import akatomakhin.apps.usermanager.user.object.User;
 
 import javax.servlet.http.HttpServlet;

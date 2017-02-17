@@ -1,4 +1,4 @@
-package akatomakhin.apps.usermanager.facade;
+package akatomakhin.apps.usermanager.usermanager;
 
 import akatomakhin.apps.usermanager.user.object.User;
 
