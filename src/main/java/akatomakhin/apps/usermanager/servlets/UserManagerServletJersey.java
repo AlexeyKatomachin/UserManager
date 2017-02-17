@@ -1,7 +1,7 @@
-package servlets;
+package akatomakhin.apps.usermanager.servlets;
 
-import facade.UserManager;
-import user.object.User;
+import akatomakhin.apps.usermanager.facade.UserManager;
+import akatomakhin.apps.usermanager.user.object.User;
 
 import javax.servlet.http.HttpServlet;
 import javax.ws.rs.*;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by ${Alexey} on ${09.08.2016}.
  */
-@Path("/user")
+@Path("/akatomakhin/apps/usermanager/user")
 
 public class UserManagerServletJersey extends HttpServlet {
 

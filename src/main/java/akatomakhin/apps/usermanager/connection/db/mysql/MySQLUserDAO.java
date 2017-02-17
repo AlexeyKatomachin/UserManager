@@ -1,7 +1,7 @@
-package connection.db.mysql;
+package akatomakhin.apps.usermanager.connection.db.mysql;
 
-import connection.db.ConnectionInterface;
-import user.object.User;
+import akatomakhin.apps.usermanager.connection.db.UserDAO;
+import akatomakhin.apps.usermanager.user.object.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by ${Alexey} on ${09.08.2016}.
  */
-public class MySQLConnection implements ConnectionInterface {
+public class MySQLUserDAO implements UserDAO {
 
     /*
     * Create response to create some user
@@ -21,10 +21,10 @@ public class MySQLConnection implements ConnectionInterface {
         String insertQueryStatement = "insert into users(user_name,user_age,user_employment,user_hoby) value (?,?,?,?)";
         try {
             preparedStatement = connection.prepareStatement(insertQueryStatement);
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setInt(2, user.getAge());
-            preparedStatement.setString(3, user.getEmployment());
-            preparedStatement.setString(4, user.getHoby());
+            preparedStatement.setString('1', user.getName());
+            preparedStatement.setInt('2', user.getAge());
+            preparedStatement.setString('3', user.getEmployment());
+            preparedStatement.setString('4', user.getHoby());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Prepare Statement to create Failed");

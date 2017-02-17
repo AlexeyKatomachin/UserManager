@@ -1,9 +1,9 @@
-package servlets;
+package akatomakhin.apps.usermanager.servlets;
 
+import akatomakhin.apps.usermanager.facade.UserManager;
+import akatomakhin.apps.usermanager.user.object.User;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.ObjectMapper;
-import facade.UserManager;
-import user.object.User;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +32,7 @@ public class UserManagerServlet extends HttpServlet {
         }
 
         ObjectMapper mapper = new ObjectMapper();
-        if ((lastSymbol != req.getRequestURL().length() && (lastSymbol > req.getRequestURL().indexOf("user")))) {
+        if ((lastSymbol != req.getRequestURL().length() && (lastSymbol > req.getRequestURL().indexOf("akatomakhin/apps/usermanager/user")))) {
         /* get Id from Url and get User with this Url*/
             String userIdStr = req.getRequestURL().substring(lastSymbol);
             int userId = Integer.valueOf(userIdStr);
@@ -40,7 +40,7 @@ public class UserManagerServlet extends HttpServlet {
         /* make JSON Stream*/
             mapper.writeValue(res.getOutputStream(),new UserManager().getUser(userId));
 
-        }else if ((lastSymbol == req.getRequestURL().length() || (lastSymbol <= req.getRequestURL().indexOf("user")))){
+        }else if ((lastSymbol == req.getRequestURL().length() || (lastSymbol <= req.getRequestURL().indexOf("akatomakhin/apps/usermanager/user")))){
             mapper.writeValue(res.getOutputStream(), new UserManager().getAllUsers());
         }
 
@@ -71,7 +71,7 @@ public class UserManagerServlet extends HttpServlet {
             }
         }
 
-        if ((lastSymbol != req.getRequestURL().length() && (lastSymbol > req.getRequestURL().indexOf("user")))) {
+        if ((lastSymbol != req.getRequestURL().length() && (lastSymbol > req.getRequestURL().indexOf("akatomakhin/apps/usermanager/user")))) {
             String userIdStr = req.getRequestURL().substring(lastSymbol);
             int userId = Integer.valueOf(userIdStr);
             new UserManager().deleteUser(userId);
@@ -90,7 +90,7 @@ public class UserManagerServlet extends HttpServlet {
         }
 
         /* Get data*/
-        if ((lastSymbol != req.getRequestURL().length() && (lastSymbol > req.getRequestURL().indexOf("user")))) {
+        if ((lastSymbol != req.getRequestURL().length() && (lastSymbol > req.getRequestURL().indexOf("akatomakhin/apps/usermanager/user")))) {
             ObjectMapper mapper = new ObjectMapper();
             User user = mapper.readValue(req.getInputStream(),User.class);
             String userIdStr = req.getRequestURL().substring(lastSymbol);

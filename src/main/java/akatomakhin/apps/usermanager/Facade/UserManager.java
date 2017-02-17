@@ -1,7 +1,7 @@
-package facade;
+package akatomakhin.apps.usermanager.facade;
 
-import connection.db.mysql.MySQLConnection;
-import user.object.User;
+import akatomakhin.apps.usermanager.connection.db.mysql.MySQLUserDAO;
+import akatomakhin.apps.usermanager.user.object.User;
 
 import java.util.ArrayList;
 
@@ -14,28 +14,28 @@ public class UserManager implements UserManagerInterface {
     *create User
      */
     public void createUser(User user) {
-        new MySQLConnection().createUser(user);
+        new MySQLUserDAO().createUser(user);
     }
 
     /*
     *Delete User by ID
      */
     public void deleteUser(int id) {
-        new MySQLConnection().deleteUser(id);
+        new MySQLUserDAO().deleteUser(id);
     }
 
     /*
     *Update user
      */
     public void updateUser(User user) {
-        new MySQLConnection().updateUser(user);
+        new MySQLUserDAO().updateUser(user);
     }
 
     /*
     * make users Array
      */
     public  ArrayList<User> getAllUsers() {
-        ArrayList<User> allUsers = new MySQLConnection().getAllUsers();;
+        ArrayList<User> allUsers = new MySQLUserDAO().getAllUsers();;
         return allUsers;
     }
 
@@ -43,7 +43,7 @@ public class UserManager implements UserManagerInterface {
     * make Object user
      */
     public  User getUser(int id) {
-        User user = new MySQLConnection().getUser(id);
+        User user = new MySQLUserDAO().getUser(id);
         return user;
     }
 }

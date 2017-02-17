@@ -1,7 +1,7 @@
-package facade;
+package akatomakhin.apps.usermanager.facade;
 
 import org.junit.Test;
-import user.object.User;
+import akatomakhin.apps.usermanager.user.object.User;
 
 import static org.junit.Assert.*;
 

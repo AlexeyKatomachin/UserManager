@@ -1,4 +1,4 @@
-package user.object;
+package akatomakhin.apps.usermanager.user.object;
 
 /**
  * Created by ${Alexey} on ${09.08.2016}.
