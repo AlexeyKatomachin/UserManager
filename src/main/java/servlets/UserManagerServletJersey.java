@@ -1,7 +1,7 @@
 package servlets;
 
-import user.UserManager;
-import user.userToJSON.User;
+import facade.UserManager;
+import user.object.User;
 
 import javax.servlet.http.HttpServlet;
 import javax.ws.rs.*;

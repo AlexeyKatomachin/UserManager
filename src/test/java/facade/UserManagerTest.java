@@ -1,7 +1,7 @@
-package user;
+package facade;
 
 import org.junit.Test;
-import user.userToJSON.User;
+import user.object.User;
 
 import static org.junit.Assert.*;
 

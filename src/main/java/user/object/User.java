@@ -1,9 +1,10 @@
-package user.userToJSON;
+package user.object;
 
 /**
  * Created by ${Alexey} on ${09.08.2016}.
  */
-public class User {
+
+public class  User {
     private int id;
     private String name;
     private int age;

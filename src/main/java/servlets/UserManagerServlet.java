@@ -2,8 +2,8 @@ package servlets;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.ObjectMapper;
-import user.UserManager;
-import user.userToJSON.User;
+import facade.UserManager;
+import user.object.User;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +21,7 @@ public class UserManagerServlet extends HttpServlet {
     }
 
     /* get user*/
-    public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
-
+    public void  doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
         /* find index of last '/' symbol*/
         int lastSymbol = 0;
         for (int i = 0; i < req.getRequestURL().length(); ++i) {
@@ -39,7 +38,7 @@ public class UserManagerServlet extends HttpServlet {
             int userId = Integer.valueOf(userIdStr);
 
         /* make JSON Stream*/
-            mapper.writeValue(res.getOutputStream(), new UserManager().getUser(userId));
+            mapper.writeValue(res.getOutputStream(),new UserManager().getUser(userId));
 
         }else if ((lastSymbol == req.getRequestURL().length() || (lastSymbol <= req.getRequestURL().indexOf("user")))){
             mapper.writeValue(res.getOutputStream(), new UserManager().getAllUsers());
@@ -47,10 +46,12 @@ public class UserManagerServlet extends HttpServlet {
 
         res.getOutputStream().flush();
         res.getOutputStream().close();
+
     }
 
     /* create user*/
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
+
         /* read JSON data */
         ObjectMapper mapper = new ObjectMapper();
 
