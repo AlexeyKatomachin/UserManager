@@ -99,7 +99,6 @@ public class UserManagerServlet extends HttpServlet {
             if( new UserManager().updateUser(user).getMassage() != null){
                 ErrorMassage errorMassage = new ErrorMassage();
                 errorMassage.setError(new UserManager().updateUser(user));
-                String massageError = mapper.writeValueAsString(errorMassage);
                 res.addHeader("Content-Type","application/json");
                 res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 mapper.writeValue(res.getOutputStream(),errorMassage);
