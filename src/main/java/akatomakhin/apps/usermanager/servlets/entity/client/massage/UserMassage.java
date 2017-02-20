@@ -1,4 +1,4 @@
-package akatomakhin.apps.usermanager.servlets.object.to.client.massage;
+package akatomakhin.apps.usermanager.servlets.entity.client.massage;
 
 /**
  * Created by ${Alexey} on ${09.08.2016}.

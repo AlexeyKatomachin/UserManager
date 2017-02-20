@@ -1,6 +1,6 @@
-package akatomakhin.apps.usermanager.servlets.object.to.client.massage.type;
+package akatomakhin.apps.usermanager.servlets.entity.client.massage.type;
 
-import akatomakhin.apps.usermanager.servlets.object.to.client.massage.UserMassage;
+import akatomakhin.apps.usermanager.servlets.entity.client.massage.UserMassage;
 
 /**
  * Created by ${Alexey} on ${09.08.2016}.

@@ -1,6 +1,6 @@
-package akatomakhin.apps.usermanager.connection.db;
+package akatomakhin.apps.usermanager.dao;
 
-import akatomakhin.apps.usermanager.user.object.User;
+import akatomakhin.apps.usermanager.entity.User;
 
 import java.util.ArrayList;
 

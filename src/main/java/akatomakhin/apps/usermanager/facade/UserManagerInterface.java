@@ -1,7 +1,7 @@
 package akatomakhin.apps.usermanager.facade;
 
-import akatomakhin.apps.usermanager.servlets.object.to.client.massage.UserMassage;
-import akatomakhin.apps.usermanager.user.object.User;
+import akatomakhin.apps.usermanager.servlets.entity.client.massage.UserMassage;
+import akatomakhin.apps.usermanager.entity.User;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
-package akatomakhin.apps.usermanager.connection.db.mysql;
+package akatomakhin.apps.usermanager.dao.mysql;
 
-import akatomakhin.apps.usermanager.connection.db.UserDAO;
-import akatomakhin.apps.usermanager.user.object.User;
+import akatomakhin.apps.usermanager.dao.UserDAO;
+import akatomakhin.apps.usermanager.entity.User;
 
 import java.sql.*;
 import java.util.ArrayList;
